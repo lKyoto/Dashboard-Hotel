@@ -2,7 +2,9 @@
   <v-app>
     <v-content>
       <v-container>
-        <Room />
+        <router-link to="/">Home </router-link> |
+        <router-link to="/room">Room</router-link> | 
+        <router-link to="/about">About</router-link>
         <router-view/>
       </v-container>
     </v-content>
@@ -10,13 +12,10 @@
 </template>
 
 <script>
-import Room from  './components/Room'
 
 export default {
   name: 'App',
-  components: {
-    Room
-  },
+  
   data () {
     return {
       //
