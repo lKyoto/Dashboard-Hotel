@@ -1,29 +1,27 @@
 <template>
-    <div>
-        <h3>Ro</h3>
-        <div>
-            <div v-for="i in get_all_rooms" :key="i.id">
-                {{i.name}}
-            </div>
-        </div>
+  <div>
+    <h3>ROOM</h3>
+    <div v-for="i in get_all_rooms" :key="i.id">
+        {{i[1].name}}
+        {{i[2].description}}
     </div>
+  </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex"
+import { mapGetters, mapActions } from "vuex";
 
 export default {
-    name: "Room",
-    methods: {
-        ...mapActions(['fetchAll'])
-    },
-    computed: mapGetters(["get_all_rooms"]),
-    created(){
-        this.fetchAll()
-    }
-}
+  name: "Room",
+  methods: {
+    ...mapActions(["fetchAll"])
+  },
+  computed: mapGetters(["get_all_rooms"]),
+  created() {
+    this.fetchAll();
+  }
+};
 </script>
 
 <style>
-
 </style>

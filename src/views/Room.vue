@@ -1,5 +1,16 @@
 <template>
   <div class="about">
-    <h1>This is an room pages</h1>
+    
+    <Room/>
   </div>
 </template>
+
+<script>
+
+import Room from "@/components/Room.vue"
+export default {
+    components: {
+        Room
+    }
+}
+</script>
