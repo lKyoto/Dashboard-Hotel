@@ -1,9 +1,6 @@
 <template>
     <div id="app">
    <v-app light>
-    <v-toolbar class="white">
-      <v-toolbar-title v-text="title">Hotel</v-toolbar-title>
-    </v-toolbar>
     <v-content>
       <section>
         <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg" >
@@ -139,14 +136,6 @@
           </v-layout>
         </v-container>
       </section>
-
-      <v-footer class="primary">
-        <v-layout row wrap align-center>
-          <v-flex xs12>
-              
-          </v-flex>
-        </v-layout>
-      </v-footer>
     </v-content>
   </v-app>
  </div>

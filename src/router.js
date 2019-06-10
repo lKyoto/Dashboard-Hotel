@@ -17,6 +17,11 @@ export default new Router({
       component: () => import(/* webpackChunkName: "room" */ './views/Room.vue')
     },
     {
+      path: '/activitie',
+      name: 'activitie',
+      component: () => import(/* webpackChunkName: "activitie" */ './views/Activitie.vue')
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting
