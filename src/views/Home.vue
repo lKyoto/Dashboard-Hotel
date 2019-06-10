@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-   <v-app light>
+   <v-app >
     <v-content>
       <section>
         <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg" >
