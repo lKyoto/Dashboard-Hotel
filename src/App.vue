@@ -1,5 +1,5 @@
 <template>
-  <v-app >
+  <v-app dark>
     <v-content>
       <v-container>
       <v-toolbar >
@@ -7,6 +7,7 @@
         <router-link to="/">Home</router-link>|
         <router-link to="/room">Room</router-link>|
         <router-link to="/activitie">Activitie</router-link>|
+        <router-link to="/activitie/create">Crear Actividad</router-link>|
         <router-link to="/about">About</router-link>
          <v-spacer></v-spacer>
         <router-link to="/login">Log in</router-link>
