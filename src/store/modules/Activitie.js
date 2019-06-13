@@ -6,15 +6,16 @@ const getters = {
     allActivities: state => state.activitie
 }
 const actions = {
-    async fetchActivitie({ commit }) {
+    async GET_Activitie({ commit }) {
         const response = await axios.get('http://localhost:3000/activities')
         console.log(response.data)
         console.log(response)
         commit('setActivities', response.data)
-    }
+    },
 }
+
 const mutations = {
-    setActivities: (state, activitie) => (state.activitie = activitie)
+    setActivities: (state, activities) => (state.activitie = activities),
 }
 export default {
     state,

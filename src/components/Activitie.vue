@@ -1,7 +1,7 @@
 <template>
   <v-timeline>
     <v-timeline-item
-      v-for="item in allActivities" :key="item.id" class="room">
+      v-for="item in allActivities" :key="item.id" >
       <template v-slot:opposite>
         <span>{{item.date}}</span>
       </template>
@@ -17,15 +17,22 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 
+class Activitie {
+  constructor(name, price, description) {
+    (this.name = name), (this.price = price), (this.description = description);
+  }
+}
+
+
 export default {
     name: "Activitie",
     methods: {
-   ...mapActions(['fetchActivitie'])
+   ...mapActions(['GET_Activitie'])
  },
  
  computed: mapGetters(['allActivities']),
  created(){
-   this.fetchActivitie()
+   this.GET_Activitie()
  } 
 };
 </script>
