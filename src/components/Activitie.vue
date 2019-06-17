@@ -17,13 +17,6 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 
-class Activitie {
-  constructor(name, price, description) {
-    (this.name = name), (this.price = price), (this.description = description);
-  }
-}
-
-
 export default {
     name: "Activitie",
     methods: {
