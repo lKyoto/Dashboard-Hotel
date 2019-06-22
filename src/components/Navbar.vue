@@ -3,30 +3,13 @@
     <v-content>
       <v-container>
         <v-toolbar>
-          <ul>
-            <li>
               <router-link to="/">Home</router-link>|
-            </li>
-            <li>
               <router-link to="/room">Room</router-link>|
-            </li>
-            <li>
               <router-link to="/activitie">Activitie</router-link>|
-            </li>
-            <li>
               <router-link to="/activitie/create">Crear Actividad</router-link>|
-            </li>
-            <li v-if="auth==''" >
-              <router-link to="/about">About</router-link>|
-            </li>
+              <router-link to="/about">About</router-link>
             <v-spacer></v-spacer>
-            <li>
-              <router-link to="/login">Log in</router-link>|
-            </li>
-            <li v-if="auth=='loggdin'">
-              <router-link to="/">Log out</router-link>|
-            </li>
-          </ul>
+              <router-link to="/login">Log in</router-link><span v-if="isLoggedIn"> | <a @click="logout">Logout</a></span>
         </v-toolbar>
         <router-view/>
       </v-container>
@@ -35,33 +18,17 @@
 </template>
 
 <script>
-// import EventBus from '../components/EventBus'
-// EventBus.$on('logged-in', test =>{
-//     console.log(test)
-// })
-
-export default {
-  data() {
-    return {
-      auth: "",
-      user: ""
-    };
-  },
-  methods: {
-    logout() {
-      localStorage.removeItem("usertoken");
-    }
-  },
-  mounted() {
-    EventBus.$on("logged-in", status => {
-      this.auth = status;
-    });
+  export default {
+    computed : {
+      isLoggedIn : function(){ return this.$store.getters.isLoggedIn}
+    },
+    methods: {
+      logout: function () {
+        this.$store.dispatch('logout')
+        .then(() => {
+          this.$router.push('/login')
+        })
+      }
+    },
   }
-};
 </script>
-
-<style scoped>
-li {
-  display: inline;
-}
-</style>

@@ -1,86 +1,97 @@
 <template>
-  <v-form v-model="valid">
-    <v-container>
-      <v-layout align-center justify-center column fill-height>
-        <v-flex
-          xs12
-          md4
-        >
-          <v-text-field
-            v-model="email"
-            :rules="nameRules"
-            :counter="10"
-            label="Correo"
-            required
-          ></v-text-field>
-        </v-flex>
+  <div>
+    <h4>Register</h4>
+    <form @submit.prevent="register">
+      <label for="name">Name</label>
+      <div>
+          <input id="name" type="text" v-model="name" required autofocus>
+      </div>
 
-        <v-flex
-          xs12
-          md4
-        >
-          <v-text-field
-            v-model="password"
-            :rules="nameRules"
-            :counter="10"
-            label="Contraseña"
-            required
-          ></v-text-field>
-        </v-flex>
+      <label for="email" >E-Mail Address</label>
+      <div>
+          <input id="email" type="email" v-model="email" required>
+      </div>
 
-        <v-flex
-          xs12
-          md4
-        >
-            <template>
-                <v-btn :disabled="!valid" color="success"  @click="login()">Login</v-btn>
-            </template>
-            <template>
-                <v-btn :disabled="!valid" color="success">Login</v-btn>
-            </template>
-         </v-flex>
-      </v-layout>
-    </v-container>
-  </v-form>
+      <label for="password">Password</label>
+      <div>
+          <input id="password" type="password" v-model="password" required>
+      </div>
+
+      <label for="password-confirm">Confirm Password</label>
+      <div>
+          <input id="password-confirm" type="password" v-model="password_confirmation" required>
+      </div>
+
+      <div>
+          <button type="submit">Register</button>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
-import axios from 'axios'
-import router from '../../router'
-import EventBus from '../EventBus'
-
-export default {
-    name: 'Login',
-    data(){
-        return{
-            email: '',
-            password: ''
-        }
-    },
-    methods: {
-        login(){
-            axios.post('/users/login', {
-                email: this.email,
-                password: this.password
-            })
-            .then(res => {
-                localStorage.setItem('usertoken', res.data)
-                this.email = ''
-                this.password = ''
-                router.push({name: 'home'})
-            })
-            .catch(err => {
-                console.log(err)
-            })
-            this.emitMethod()
+    export default {
+        props : ["nextUrl"],
+        data(){
+            return {
+                name : "",
+                email : "",
+                password : "",
+                password_confirmation : "",
+                is_admin : null
+            }
         },
-        emitMethod(){
-            EventBus.$emit('logged-in', 'loggedin')
+        methods : {
+            // handleSubmit(e) {
+            //     e.preventDefault()
+
+            //     if (this.password === this.password_confirmation && this.password.length > 0)
+            //     {
+            //         let url = "http://localhost:3000/users/signup"
+            //         if(this.is_admin != null || this.is_admin == 1) url = "http://localhost:3000/users/signup"
+            //         this.$http.post(url, {
+            //             name: this.name,
+            //             email: this.email,
+            //             password: this.password,
+            //             is_admin: this.is_admin
+            //         })
+            //         .then(response => {
+            //             localStorage.setItem('user',JSON.stringify(response.data.user))
+            //             localStorage.setItem('jwt',response.data.token)
+
+            //             if (localStorage.getItem('jwt') != null){
+            //                 this.$emit('loggedIn')
+            //                 if(this.$route.params.nextUrl != null){
+            //                     this.$router.push(this.$route.params.nextUrl)
+            //                 }
+            //                 else{
+            //                     this.$router.push('/')
+            //                 }
+            //             }
+            //         })
+            //         .catch(error => {
+            //             console.error(error);
+            //         });
+            //     } else {
+            //         this.password = ""
+            //         this.passwordConfirm = ""
+
+            //         return alert("Passwords do not match")
+            //     }
+            // }
+            register: function () {
+                let data = {
+                name: this.name,
+                email: this.email,
+                password: this.password,
+                is_admin: this.is_admin
+                }
+                this.$store.dispatch('register', data)
+            .then(() => this.$router.push('/'))
+            .catch(err => console.log(err))
+            }
+            }
         }
     }
-}
 </script>
 
-<style>
-
-</style>
