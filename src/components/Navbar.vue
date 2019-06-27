@@ -6,10 +6,18 @@
               <router-link to="/">Home</router-link>|
               <router-link to="/room">Room</router-link>|
               <router-link to="/activitie">Activitie</router-link>|
-              <router-link to="/activitie/create">Crear Actividad</router-link>|
-              <router-link to="/about">About</router-link>
+              <span v-if="isLoggedIn">
+                <router-link to="/activitie/create">Crear Actividad</router-link>|
+              </span>
+              <span v-if="isLoggedIn">
+                <router-link to="/about">About</router-link>|
+              </span>
             <v-spacer></v-spacer>
-              <router-link to="/login">Log in</router-link><span v-if="isLoggedIn"> | <a @click="logout">Logout</a></span>
+            <span  v-if="!isLoggedIn">
+              <router-link to="/login">Log in</router-link>
+            </span>
+            <span v-if="isLoggedIn"><a @click="logout">Logout</a>
+            </span>
         </v-toolbar>
         <router-view/>
       </v-container>
