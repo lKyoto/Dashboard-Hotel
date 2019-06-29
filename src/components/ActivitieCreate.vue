@@ -11,8 +11,14 @@
             :rules="nameRules"
             required
           ></v-text-field>
-          <v-text-field v-model="activitie.price" label="Precio" :rules="priceRules" required></v-text-field>
+          <v-text-field 
+            v-model="activitie.price" 
+            label="Precio" 
+            :rules="priceRules" 
+            required
+          ></v-text-field>
           <v-textarea
+            height="150"
             v-model="activitie.description"
             :counter="200"
             label="Descripción"
@@ -30,9 +36,16 @@
       </v-flex>
       <!-- Seccion del calendario -->
       <v-spacer></v-spacer>
-      <v-flex xs12 md7>
-        <v-sheet height="500">
-          <v-calendar></v-calendar>
+      <v-flex xs12 md6>
+        <v-sheet height="390">
+          <v-card>
+            <v-date-picker 
+              v-model="activitie.date"
+              full-width
+              locale="es"
+              :min="min"
+            ></v-date-picker>
+          </v-card>
         </v-sheet>
       </v-flex>
     </v-layout>
@@ -47,18 +60,18 @@
 		<th>Descripcion</th>
     <th>Fecha</th>
     <th>Activo</th>
-    <th></th>
-    <th></th>
+    <th>Borrar</th>
+    <th>Actualizar</th>
 	</tr>
 	</thead>
 	<tbody>
 	<tr v-for="item of activities" :key="item.id" >
 		<td>{{item.name}}</td>
-		<td>{{item.price}}</td>
+		<td>₡ {{item.price}}</td>
 		<td>{{item.description}}</td>
-		<td>{{item.date}}</td>
+		<td>{{item.date.substr(0,10)}}</td>
 		<td>{{item._id}}</td>
-		<td @click="DELETE_Activitie(item._id)"><v-icon small  color="error" class="icons">delete</v-icon></td>
+		<td @click="DELETE_Activitie(item._id)"><v-icon small color="error" class="icons">delete</v-icon></td>
 		<td @click="UPDATE_Activitie(item._id)"><v-icon small color="warning" class="icons">create</v-icon></td>
 	</tr>
 	</tbody>
@@ -70,24 +83,16 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 class Activitie {
-  constructor(name, price, description) {
-    (this.name = name), (this.price = price), (this.description = description);
+  constructor(name, price, description, date) {
+    (this.name = name), (this.price = price), (this.description = description), (this.date = date);
   }
 }
-  //ESTE ES EL ULTIMO AVANCE
-  //ESTE ES EL ULTIMO AVANCE
-  //ESTE ES EL ULTIMO AVANCE
-  //ESTE ES EL ULTIMO AVANCE
-  //ESTE ES EL ULTIMO AVANCE
-  //ESTE ES EL ULTIMO AVANCE
-  //ESTE ES EL ULTIMO AVANCE
-  //ESTE ES EL ULTIMO AVANCE
-  //ESTE ES EL ULTIMO AVANCE
-
 
 export default {
   data() {
     return {
+      // date: '',
+      min: new Date().toISOString().substr(0, 10),
       valid: true,
       activitie: new Activitie(),
       activities: [],
